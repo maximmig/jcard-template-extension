@@ -10,7 +10,12 @@
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": ["activeTab", "scripting"],
+  "content_scripts": [
+    {
+      "matches": ["https://unixispower.gitlab.io/jcard-template/*"],
+      "js": ["content.js"]
+    }
+  ],
   "host_permissions": [
     "https://unixispower.gitlab.io/jcard-template/*",
     "https://www.discogs.com/*",
