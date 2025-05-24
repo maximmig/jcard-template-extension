@@ -1,0 +1,25 @@
+{
+  "name": "jcard-template-extension",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/maximmig/jcard-template-extension.git"
+  },
+  "author": "Maxim Mig",
+  "license": "MIT",
+  "private": false,
+  "bugs": {
+    "url": "https://github.com/maximmig/jcard-template-extension/issues"
+  },
+  "homepage": "https://github.com/maximmig/jcard-template-extension#readme",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}
