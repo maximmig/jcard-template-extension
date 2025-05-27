@@ -1,3 +1,5 @@
+import {BandcampRelease, DiscogsRelease} from "./models/index.js";
+
 function addImportFields() {
   const controls = document.getElementById('controls');
 
@@ -20,22 +22,30 @@ function addImportFields() {
     button.classList.add('field-input');
     button.value = 'Run';
     button.addEventListener('click', () => {
-      input.setAttribute('disabled', 'disabled');
       const url = input.value;
+      const domain = getRootDomain(url);
 
-      chrome.runtime.sendMessage({
-        type: "import-from",
-        url: url,
-      }, importedData => {
-        input.removeAttribute('disabled');
+      if (domain === 'discogs.com' || domain === 'bandcamp.com') {
+        input.setAttribute('disabled', 'disabled');
 
-        if (chrome.runtime.lastError) {
-          console.error("Error sending message:", chrome.runtime.lastError.message);
-          return;
-        }
+        chrome.runtime.sendMessage({ type: 'load-page', url }, (htmlString) => {
+          input.removeAttribute('disabled');
 
-        console.log("Received data: %o", importedData);
-      });
+          if (chrome.runtime.lastError) {
+            console.error("Error sending message:", chrome.runtime.lastError.message);
+            return;
+          }
+
+          try {
+            const release = createRelease(domain, htmlString);
+            console.log(release.title);
+          } catch (e) {
+            console.error(e.message);
+          }
+        });
+      } else {
+        console.warn(`Unsupported domain: ${domain}`);
+      }
     });
 
     const buttonField = document.createElement('div');
@@ -77,3 +87,28 @@ function addImportFields() {
 (() => {
   addImportFields();
 })();
+
+const getRootDomain = url => {
+  const {hostname} = URL.parse(url);
+
+  const parts = hostname.replace(/^www\./, '').split('.');
+
+  if (parts.length >= 2) {
+    return parts.slice(-2).join('.');
+  }
+
+  return hostname; // fallback
+}
+
+const createRelease = (domain, htmlString) => {
+  switch (domain) {
+    case 'discogs.com': {
+      return new DiscogsRelease(htmlString);
+    }
+    case 'bandcamp.com': {
+      return new BandcampRelease(htmlString);
+    }
+    default:
+      throw new Error(`Unsupported domain: ${domain}`);
+  }
+}
