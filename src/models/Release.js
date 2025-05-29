@@ -1,16 +1,18 @@
 export default class Release {
-  doc;
+  _document;
+  _title;
 
-  constructor(htmlString) {
-    this.doc = Release.parseHtml(htmlString);
+  constructor(document) {
+    this._document = document;
+
+    this.initFromDocument();
   }
 
   get title() {
-    return this.doc.head.getElementsByTagName('title')[0].textContent.trim();
+    return this._title;
   }
 
-  static parseHtml(htmlString) {
-    const parser = new DOMParser();
-    return parser.parseFromString(htmlString, 'text/html');
+  initFromDocument() {
+    throw new Error(`Method 'initFromDocument' must be implemented in derived class.`);
   }
 }

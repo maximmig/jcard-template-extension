@@ -1,9 +1,7 @@
-import Release from "./Release.js";
-import BandcampRelease from "./BandcampRelease.js";
-import DiscogsRelease from "./DiscogsRelease.js";
+import createReleaseFromHtml from "./createReleaseFromHtml.js";
+import MusicDatabases from "./MusicDatabases.js";
 
 export {
-  BandcampRelease,
-  DiscogsRelease,
-  Release
+  createReleaseFromHtml,
+  MusicDatabases
 }

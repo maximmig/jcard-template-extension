@@ -1,4 +1,4 @@
-import {BandcampRelease, DiscogsRelease} from "./models/index.js";
+import {createReleaseFromHtml, MusicDatabases} from "./models/index.js";
 
 function addImportFields() {
   const controls = document.getElementById('controls');
@@ -23,9 +23,9 @@ function addImportFields() {
     button.value = 'Run';
     button.addEventListener('click', () => {
       const url = input.value;
-      const domain = getRootDomain(url);
+      const database = MusicDatabases.fromUrl(url);
 
-      if (domain === 'discogs.com' || domain === 'bandcamp.com') {
+      if (MusicDatabases.isSupported(database)) {
         input.setAttribute('disabled', 'disabled');
 
         chrome.runtime.sendMessage({ type: 'load-page', url }, (htmlString) => {
@@ -37,14 +37,16 @@ function addImportFields() {
           }
 
           try {
-            const release = createRelease(domain, htmlString);
-            console.log(release.title);
+            const release = createReleaseFromHtml(htmlString, database);
+            const subtitleInput = document.getElementById('controls-subtitle');
+            subtitleInput.value = release.title;
+            subtitleInput.dispatchEvent(new Event('input', { bubbles: true }));
           } catch (e) {
             console.error(e.message);
           }
         });
       } else {
-        console.warn(`Unsupported domain: ${domain}`);
+        console.warn(`${database} is unsupported`);
       }
     });
 
@@ -87,28 +89,3 @@ function addImportFields() {
 (() => {
   addImportFields();
 })();
-
-const getRootDomain = url => {
-  const {hostname} = URL.parse(url);
-
-  const parts = hostname.replace(/^www\./, '').split('.');
-
-  if (parts.length >= 2) {
-    return parts.slice(-2).join('.');
-  }
-
-  return hostname; // fallback
-}
-
-const createRelease = (domain, htmlString) => {
-  switch (domain) {
-    case 'discogs.com': {
-      return new DiscogsRelease(htmlString);
-    }
-    case 'bandcamp.com': {
-      return new BandcampRelease(htmlString);
-    }
-    default:
-      throw new Error(`Unsupported domain: ${domain}`);
-  }
-}
