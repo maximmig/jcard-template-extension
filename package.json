@@ -15,9 +15,11 @@
   },
   "homepage": "https://github.com/maximmig/jcard-template-extension#readme",
   "scripts": {
-    "build": "vite build"
+    "build": "vite build",
+    "check-cycles": "madge --circular ./src"
   },
   "devDependencies": {
+    "madge": "^8.0.0",
     "vite": "^6.3.5"
   }
 }
