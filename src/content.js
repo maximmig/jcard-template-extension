@@ -32,15 +32,23 @@ function addImportFields() {
           input.removeAttribute('disabled');
 
           if (chrome.runtime.lastError) {
-            console.error("Error sending message:", chrome.runtime.lastError.message);
+            console.error("Error handling request:", chrome.runtime.lastError.message);
             return;
           }
 
           try {
             const release = createReleaseFromHtml(htmlString, database);
-            const subtitleInput = document.getElementById('controls-subtitle');
-            subtitleInput.value = release.title;
-            subtitleInput.dispatchEvent(new Event('input', { bubbles: true }));
+
+            setInputValue('controls-title', release.artist);
+            setInputValue('controls-subtitle', release.title);
+            setInputValue('controls-note-upper', 'Released');
+            setInputValue('controls-note-lower', release.released);
+            setInputValue('controls-side-a', release.sideA);
+            setInputValue('controls-side-b', release.sideB);
+
+            const cover = document.querySelector('.template-cover');
+            cover.src = release.coverUrl || '';
+
           } catch (e) {
             console.error(e.message);
           }
@@ -89,3 +97,13 @@ function addImportFields() {
 (() => {
   addImportFields();
 })();
+
+const setInputValue = (id, value) => {
+  const input = document.getElementById(id);
+  if (input) {
+    input.value = value;
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+  } else {
+    console.warn(`Input with id ${id} not found`);
+  }
+}
