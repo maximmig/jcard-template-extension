@@ -46,8 +46,11 @@ function addImportFields() {
             setInputValue('controls-side-a', release.sideA);
             setInputValue('controls-side-b', release.sideB);
 
-            const cover = document.querySelector('.template-cover');
-            cover.src = release.coverUrl || '';
+            document.querySelectorAll('.template-cover').forEach(cover => {
+              if (release.coverUrl) {
+                cover.src = release.coverUrl;
+              }
+            });
 
           } catch (e) {
             console.error(e.message);
