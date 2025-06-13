@@ -18,6 +18,7 @@
     "lint": "eslint --ext .js ./",
     "lint:fix": "eslint --fix --ext .js ./",
     "format": "prettier --write \"./**/*.{js,jsx,json,css}\"",
+    "test": "vitest",
     "build": "vite build",
     "check-cycles": "madge --circular ./src"
   },
@@ -27,9 +28,12 @@
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.4.1",
+    "eslint-plugin-vitest": "^0.5.4",
+    "jsdom": "^26.1.0",
     "madge": "^8.0.0",
     "prettier": "^3.5.3",
     "vite": "^6.3.5",
-    "vite-plugin-eslint": "^1.8.1"
+    "vite-plugin-eslint": "^1.8.1",
+    "vitest": "^3.2.3"
   }
 }

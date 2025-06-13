@@ -1,4 +1,4 @@
-import Release from './Release';
+import Release from './Release.js';
 
 export default class DiscogsRelease extends Release {
   initFromDocument() {

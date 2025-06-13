@@ -4,7 +4,8 @@
     "browser": true,
     "es6": true,
     "node": true,
-    "webextensions": true
+    "webextensions": true,
+    "jest": true
   },
   "extends": [
     "airbnb-base",
@@ -15,7 +16,8 @@
   ],
   "plugins": [
     "import",
-    "prettier"
+    "prettier",
+    "vitest"
   ],
   "parserOptions": {
     "ecmaVersion": "latest",
@@ -36,7 +38,8 @@
         "devDependencies": true
       }
     ],
-    "import/unambiguous": "off"
+    "import/unambiguous": "off",
+    "import/extensions": "off"
   },
   "settings": {
     "import/resolver": {

@@ -1,4 +1,4 @@
-import { createReleaseFromHtml, MusicDatabases } from './models/index';
+import { createReleaseFromHtml, MusicDatabases } from './models/index.js';
 
 const setInputValue = (id, value) => {
   const input = document.getElementById(id);

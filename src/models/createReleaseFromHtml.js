@@ -1,6 +1,6 @@
-import MusicDatabases from './MusicDatabases';
-import BandcampRelease from './BandcampRelease';
-import DiscogsRelease from './DiscogsRelease';
+import MusicDatabases from './MusicDatabases.js';
+import BandcampRelease from './BandcampRelease.js';
+import DiscogsRelease from './DiscogsRelease.js';
 
 const releaseConstructors = {
   [MusicDatabases.Bandcamp]: BandcampRelease,

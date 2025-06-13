@@ -21,4 +21,8 @@ export default defineConfig({
       fix: true,
     }),
   ],
+  test: {
+    environment: 'jsdom',
+    globals: true,
+  },
 });
