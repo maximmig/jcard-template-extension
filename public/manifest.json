@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "J-Card Template Extension",
   "short_name": "J-Card",
-  "description": "Import releases into the template from popular services such as Bandcamp, Discogs, etc.",
+  "description": "Import music releases into J-Card Template (https://unixispower.gitlab.io/jcard-template/) from popular services such as Bandcamp, Discogs, etc.",
   "version": "1.0",
   "icons": {
     "128": "icons/icon.png"
