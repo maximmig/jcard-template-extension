@@ -1,7 +1,4 @@
-import createReleaseFromHtml from "./createReleaseFromHtml.js";
-import MusicDatabases from "./MusicDatabases.js";
+import createReleaseFromHtml from './createReleaseFromHtml';
+import MusicDatabases from './MusicDatabases';
 
-export {
-  createReleaseFromHtml,
-  MusicDatabases
-}
+export { createReleaseFromHtml, MusicDatabases };

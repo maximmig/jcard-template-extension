@@ -1,4 +1,5 @@
-import {defineConfig} from 'vite';
+import { defineConfig } from 'vite';
+import eslint from 'vite-plugin-eslint';
 
 export default defineConfig({
   build: {
@@ -6,11 +7,18 @@ export default defineConfig({
     rollupOptions: {
       input: {
         background: './src/background.js',
-        content: './src/content.js'
+        content: './src/content.js',
       },
       output: {
         entryFileNames: '[name].js',
-      }
-    }
-  }
+      },
+    },
+    minify: 'esbuild',
+  },
+  plugins: [
+    eslint({
+      cache: false,
+      fix: true,
+    }),
+  ],
 });

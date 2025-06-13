@@ -1,6 +1,16 @@
-import {createReleaseFromHtml, MusicDatabases} from "./models/index.js";
+import { createReleaseFromHtml, MusicDatabases } from './models/index';
 
-function addImportFields() {
+const setInputValue = (id, value) => {
+  const input = document.getElementById(id);
+  if (input) {
+    input.value = value;
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+  } else {
+    console.warn(`Input with id ${id} not found`);
+  }
+};
+
+const addImportFields = () => {
   const controls = document.getElementById('controls');
 
   if (controls) {
@@ -32,7 +42,10 @@ function addImportFields() {
           input.removeAttribute('disabled');
 
           if (chrome.runtime.lastError) {
-            console.error("Error handling request:", chrome.runtime.lastError.message);
+            console.error(
+              'Error handling request:',
+              chrome.runtime.lastError.message,
+            );
             return;
           }
 
@@ -46,12 +59,11 @@ function addImportFields() {
             setInputValue('controls-side-a', release.sideA);
             setInputValue('controls-side-b', release.sideB);
 
-            document.querySelectorAll('.template-cover').forEach(cover => {
+            document.querySelectorAll('.template-cover').forEach((cover) => {
               if (release.coverUrl) {
                 cover.src = release.coverUrl;
               }
             });
-
           } catch (e) {
             console.error(e.message);
           }
@@ -95,18 +107,8 @@ function addImportFields() {
 
     controls.appendChild(importFieldset);
   }
-}
+};
 
 (() => {
   addImportFields();
 })();
-
-const setInputValue = (id, value) => {
-  const input = document.getElementById(id);
-  if (input) {
-    input.value = value;
-    input.dispatchEvent(new Event('input', { bubbles: true }));
-  } else {
-    console.warn(`Input with id ${id} not found`);
-  }
-}

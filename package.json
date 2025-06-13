@@ -15,12 +15,21 @@
   },
   "homepage": "https://github.com/maximmig/jcard-template-extension#readme",
   "scripts": {
+    "lint": "eslint --ext .js ./",
+    "lint:fix": "eslint --fix --ext .js ./",
+    "format": "prettier --write \"./**/*.{js,jsx,json,css}\"",
     "build": "vite build",
     "check-cycles": "madge --circular ./src"
   },
   "devDependencies": {
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-prettier": "^5.4.1",
     "madge": "^8.0.0",
     "prettier": "^3.5.3",
-    "vite": "^6.3.5"
+    "vite": "^6.3.5",
+    "vite-plugin-eslint": "^1.8.1"
   }
 }

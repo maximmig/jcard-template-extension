@@ -10,9 +10,9 @@ const MusicDatabases = {
 
   isSupported(database) {
     return Object.values(this)
-      .filter(value => typeof value === 'string')
+      .filter((value) => typeof value === 'string')
       .includes(database);
-  }
+  },
 };
 
 export default MusicDatabases;

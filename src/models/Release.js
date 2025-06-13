@@ -2,10 +2,15 @@ export default class Release {
   _document;
 
   _coverUrl;
+
   _artist;
+
   _title;
+
   _released;
+
   _sideA;
+
   _sideB;
 
   constructor(document) {
@@ -39,6 +44,8 @@ export default class Release {
   }
 
   initFromDocument() {
-    throw new Error(`Method 'initFromDocument' must be implemented in derived class.`);
+    throw new Error(
+      `Method 'initFromDocument' must be implemented in derived class.`,
+    );
   }
 }
