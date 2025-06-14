@@ -13,4 +13,21 @@ describe('MusicDatabases', () => {
       expect(MusicDatabases.isSupported(domain)).toBe(false);
     });
   });
+
+  it('correctly identifies the database from a URL', () => {
+    const testCases = [
+      {
+        url: 'https://blackcountrynewroad.bandcamp.com/album/for-the-first-time',
+        expected: 'bandcamp.com',
+      },
+      {
+        url: 'https://www.discogs.com/master/1947124-Black-Country-New-Road-For-The-First-Time',
+        expected: 'discogs.com',
+      },
+    ];
+
+    testCases.forEach(({ url, expected }) => {
+      expect(MusicDatabases.fromUrl(url)).toBe(expected);
+    });
+  });
 });
