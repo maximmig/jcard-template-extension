@@ -10,7 +10,7 @@ export default class BandcampRelease extends Release {
     const { image, name } = data.albumRelease.find((release) =>
       release['@type'].includes('Product'),
     );
-    this._coverUrl = image;
+    this._coverUrl = Array.isArray(image) ? image[0] : image;
     this._title = name;
 
     this._artist = data.byArtist.name;
