@@ -20,5 +20,14 @@
     "https://unixispower.gitlab.io/jcard-template/*",
     "https://www.discogs.com/*",
     "https://*.bandcamp.com/*"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "*.js.map",
+        "*.css.map"
+      ],
+      "matches": ["<all_urls>"]
+    }
   ]
 }
