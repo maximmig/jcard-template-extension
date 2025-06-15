@@ -6,18 +6,23 @@ export default class DiscogsRelease extends Release {
       this._document.getElementById('dsdata').textContent,
     );
     const entries = Object.entries(discogsData.data.ROOT_QUERY);
-    const [, releaseEntryKeyHolder] = entries.find(([key]) =>
-      key.startsWith('release'),
-    );
+    const [, releaseEntryKeyHolder] =
+      entries.find(
+        ([key]) => key.startsWith('release') || key.startsWith('masterRelease'),
+      ) ?? [];
     const releaseEntryKey = releaseEntryKeyHolder.__ref;
 
     const release = discogsData.data[releaseEntryKey];
-    const { title, primaryArtists, released, tracks } = release;
+    const finalRelease =
+      'keyRelease' in release // check if it's a master release
+        ? discogsData.data[release.keyRelease.__ref]
+        : release;
+    const { title, primaryArtists, released, tracks } = finalRelease;
 
-    const imagesEntryKey = Object.keys(release).find((k) =>
+    const imagesEntryKey = Object.keys(finalRelease).find((k) =>
       k.startsWith('images'),
     );
-    const images = imagesEntryKey ? release[imagesEntryKey] : null;
+    const images = imagesEntryKey ? finalRelease[imagesEntryKey] : null;
     if (images) {
       const imageNodeKey =
         images.edges.length > 0 ? images.edges[0].node.__ref : null;
