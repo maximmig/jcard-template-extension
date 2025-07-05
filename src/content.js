@@ -75,6 +75,7 @@ const addImportFields = () => {
 
     const buttonField = document.createElement('div');
     buttonField.classList.add('field');
+    buttonField.style.marginLeft = '.5em';
 
     const columnsColumn2 = document.createElement('div');
     columnsColumn2.classList.add('columns-column-2');
